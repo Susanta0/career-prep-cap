@@ -92,7 +92,7 @@
   min-height: 150px;
   padding: 10px;
 }
-.no-task {
+#no-task {
   text-align: center;
   font-size: 25px;
   font-weight: 700;

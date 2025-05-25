@@ -21,19 +21,18 @@ const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
 function renderAllTasks(filteredTask = tasks) {
   task_list.innerHTML = "";
-  if (filteredTask.length === 0){
-    const li = document.createElement("li");
-    li.className = "no-task";
-    li.textContent = "No tasks found.";
-    task_list.appendChild(li);
-  }else{
-  filteredTask.forEach((task, ind) => {
-    const li = document.createElement("li");
-    li.className = "task-item";
-    const titleClass = task.completed ? "line-through" : "";
-    const categoryClass = task.completed ? "line-through" : "";
+  const notask = document.getElementById("no-task");
+  if (filteredTask.length === 0) {
+    notask.textContent = "No tasks found.";
+  } else {
+    notask.textContent = "";
+    filteredTask.forEach((task, ind) => {
+      const li = document.createElement("li");
+      li.className = "task-item";
+      const titleClass = task.completed ? "line-through" : "";
+      const categoryClass = task.completed ? "line-through" : "";
 
-    li.innerHTML = `
+      li.innerHTML = `
      <span class="task-title">
     Task: <span class="title ${titleClass}">${task.title}</span><br/>
     Category: <span class="category ${categoryClass}">${task.category}</span>
@@ -44,23 +43,23 @@ function renderAllTasks(filteredTask = tasks) {
     </div>
     `;
 
-    // checkbox
-    const checkbox = li.querySelector(".checkbox");
-    checkbox.addEventListener("click", () => {
-      task.completed = !task.completed;
-      saveRenderTasks();
-    });
+      // checkbox
+      const checkbox = li.querySelector(".checkbox");
+      checkbox.addEventListener("click", () => {
+        task.completed = !task.completed;
+        saveRenderTasks();
+      });
 
-    // delete button
-    const deleteButton = li.querySelector(".delete-button");
-    deleteButton.addEventListener("click", () => {
-      tasks.splice(ind, 1);
-      saveRenderTasks();
-    });
+      // delete button
+      const deleteButton = li.querySelector(".delete-button");
+      deleteButton.addEventListener("click", () => {
+        tasks.splice(ind, 1);
+        saveRenderTasks();
+      });
 
-    task_list.appendChild(li);
-  });
-}
+      task_list.appendChild(li);
+    });
+  }
   clearAllBtn.style.display = tasks.length > 0 ? "block" : "none";
 }
 
