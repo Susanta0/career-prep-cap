@@ -4,7 +4,7 @@ A simple and intuitive **Task Management Web Application** built with vanilla Ja
 
 ### Live Application URLs
 
-- **Deployment Link**: []()
+- **Deployment Link**: [https://dailyplanner-tau.vercel.app/](https://dailyplanner-tau.vercel.app/)
 
 ## 🚀 Features
 
