@@ -4,7 +4,7 @@ A simple React application that displays inspirational quotes with theme switchi
 
 ## Live Demo
 
-[View Live App](your-deployment-link-here)
+[View Live App](https://quotesageadailyquotegenerator.vercel.app/)
 
 ## Features
 
@@ -18,8 +18,8 @@ A simple React application that displays inspirational quotes with theme switchi
 
 1. Clone the repository
    ```bash
-   git clone https://github.com/yourusername/quote-app.git
-   cd quote-app
+   git clone https://github.com/Susanta0/career-prep-cap.git
+   cd mini-project-2
    ```
 
 2. Install dependencies
@@ -29,10 +29,10 @@ A simple React application that displays inspirational quotes with theme switchi
 
 3. Start the development server
    ```bash
-   npm start
+   npm run dev
    ```
 
-4. Open `http://localhost:3000` in your browser
+4. Open `http://localhost:5173` in your browser
 
 ## Dependencies
 
@@ -49,7 +49,3 @@ A simple React application that displays inspirational quotes with theme switchi
 - Use the font size dropdown to change text size
 - Click "New Quote" to fetch a new quote (if API is available)
 - Click the heart button to like/unlike quotes
-
-## License
-
-MIT License
