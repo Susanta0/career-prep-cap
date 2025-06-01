@@ -1,12 +1,55 @@
-# React + Vite
+# Quote App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple React application that displays inspirational quotes with theme switching and font size customization.
 
-Currently, two official plugins are available:
+## Live Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+[View Live App](your-deployment-link-here)
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Random quotes display
+- Dark/Light theme toggle
+- Adjustable font sizes (Small, Medium, Large)
+- Like/unlike quotes functionality
+- Clean and responsive design
+
+## Installation
+
+1. Clone the repository
+   ```bash
+   git clone https://github.com/yourusername/quote-app.git
+   cd quote-app
+   ```
+
+2. Install dependencies
+   ```bash
+   npm install
+   ```
+
+3. Start the development server
+   ```bash
+   npm start
+   ```
+
+4. Open `http://localhost:3000` in your browser
+
+## Dependencies
+
+- React
+- Axios
+
+## Important Note
+
+⚠️ **API Limitation**: The ZenQuotes API used in this app has usage limitations and may not work consistently due to rate limiting. You may need to replace it with an alternative quotes API or use mock data for development.
+
+## Usage
+
+- Click "Toggle Theme" to switch between light and dark modes
+- Use the font size dropdown to change text size
+- Click "New Quote" to fetch a new quote (if API is available)
+- Click the heart button to like/unlike quotes
+
+## License
+
+MIT License

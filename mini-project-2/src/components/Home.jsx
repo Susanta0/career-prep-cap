@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import ThemeToggle from "./THemeToggel";
+import ThemeToggle from "./ThemeToggel";
 import QuoteCard from "./QuoteCard";
 
 const Home = ({ theme, toggleTheme, themeColor }) => {
