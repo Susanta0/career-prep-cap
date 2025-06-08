@@ -4,7 +4,7 @@ A modern, responsive movie search application built with React, Redux Toolkit, a
 
 ## 🚀 Live Demo
 
-**[View Live Application](https://your-app-name.netlify.app)**
+**[View Live Application](https://moviesearch-ecru-six.vercel.app/)**
 
 
 ## Project Setup
@@ -17,7 +17,7 @@ A modern, responsive movie search application built with React, Redux Toolkit, a
 
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
+   git clone <https://github.com/Susanta0/career-prep-cap.git>
    cd mini-project-3
    ```
 
