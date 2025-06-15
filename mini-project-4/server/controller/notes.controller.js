@@ -15,7 +15,8 @@ const notesController = {
         image,
       });
       await newData.save();
-      return res.status(201).json({ message: "Note created", newData });
+       const updatedNotes = await notesModel.find({ userId });
+      return res.status(201).json({ message: "Note created", updatedNotes });
     } catch (error) {
       return res.status(500).json({ message: "Internal server error", error });
     }
@@ -48,9 +49,10 @@ const notesController = {
       existingNote.image = newImageUrl;
 
       await existingNote.save();
+       const updatedNotes = await notesModel.find({ userId: req.userId });
       return res
         .status(201)
-        .json({ message: "Note updated", note: existingNote });
+        .json({ message: "Note updated", note: existingNote, updatedNotes });
     } catch (error) {
       return res.status(500).json({ message: "Internal server error", error });
     }
@@ -59,7 +61,8 @@ const notesController = {
     try {
       const { id } = req.params;
       await notesModel.findByIdAndDelete(id);
-      return res.status(200).json({ message: "Note deleted" });
+       const updatedNotes = await notesModel.find({ userId: req.userId });
+      return res.status(200).json({ message: "Note deleted", updatedNotes });
     } catch (error) {
       return res.status(500).json({ message: "Internal server error", error });
     }
