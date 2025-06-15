@@ -1,18 +1,19 @@
 const express = require("express");
+const cors = require("cors");
 const { dbConnect } = require("./config/db");
 const { authRouter } = require("./routes/auth.routes");
 const { notesRouter } = require("./routes/notes.routes");
 const app = express();
 require("dotenv").config();
 
-
-app.use(cors({
-  origin: ["*","http://localhost:5173"],
-  credentials: true,
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"]
-}));
-
+app.use(
+  cors({
+    origin: ["*", "http://localhost:5173"],
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 
 app.use(express.json());
 
