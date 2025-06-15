@@ -1,25 +1,33 @@
 import React, { useState } from "react";
-import {useSelector, useDispatch} from "react-redux"
+import { useSelector, useDispatch } from "react-redux";
 import { signupReducer } from "../redux/authSlice";
+import { Link, useNavigate } from "react-router-dom";
 const Signup = () => {
   const [form, setForm] = useState({
     name: "",
     email: "",
     password: "",
   });
-  const {loading, error}=useSelector(state=> state.auth)
-const dispatch=useDispatch()
-  const handleChange=(e)=>{
-    const {name, value}=e.target
+  const { loading, error } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleChange = (e) => {
+    const { name, value } = e.target;
 
-    setForm({...form, [name]:value})
-  }
+    setForm({ ...form, [name]: value });
+  };
 
-  const hanldeSubmit=(e)=>{
-    e.preventDefault()
-    dispatch(signupReducer(form))
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  }
+    const resultAction = await dispatch(signupReducer(form));
+
+    if (signupReducer.fulfilled.match(resultAction)) {
+      navigate("/");
+    } else {
+      console.error("Login failed:", resultAction.payload);
+    }
+  };
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 to-indigo-100 flex items-center justify-center p-4">
       <div className="max-w-md w-full bg-white rounded-2xl shadow-xl p-8">
@@ -42,8 +50,8 @@ const dispatch=useDispatch()
               type="text"
               id="name"
               name="name"
-                value={form.name}
-                onChange={handleChange}
+              value={form.name}
+              onChange={handleChange}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition duration-200 bg-gray-50 focus:bg-white"
               placeholder="Enter your full name"
               required
@@ -61,8 +69,8 @@ const dispatch=useDispatch()
               type="email"
               id="email"
               name="email"
-                value={form.email}
-                onChange={handleChange}
+              value={form.email}
+              onChange={handleChange}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition duration-200 bg-gray-50 focus:bg-white"
               placeholder="Enter your email"
               required
@@ -80,17 +88,20 @@ const dispatch=useDispatch()
               type="password"
               id="password"
               name="password"
-                value={form.password}
-                onChange={handleChange}
+              value={form.password}
+              onChange={handleChange}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition duration-200 bg-gray-50 focus:bg-white"
               placeholder="Create a password"
               required
             />
           </div>
+          <div className="flex items-center justify-between">
+            <p className="text-red-600">{error && "Something went wrong"}</p>
+          </div>
 
           <button
-          onClick={hanldeSubmit}
-          disabled={loading}
+            onClick={handleSubmit}
+            disabled={loading}
             type="submit"
             className="w-full bg-indigo-600 text-white py-3 px-4 rounded-lg font-semibold hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition duration-200 transform hover:scale-105"
           >
@@ -101,12 +112,12 @@ const dispatch=useDispatch()
         <div className="mt-6 text-center">
           <p className="text-gray-600">
             Already have an account?{" "}
-            <a
-              href="#"
+            <Link
+              to="/"
               className="text-indigo-600 hover:text-indigo-700 font-medium"
             >
               Sign In
-            </a>
+            </Link>
           </p>
         </div>
       </div>
