@@ -1,21 +1,34 @@
+
 import { useState } from 'react';
 import { getSuggestions } from '../useGemini';
 
-function TextSummarizer() {
-  const [text, setText] = useState('');
+function TextSummarizer({ title, author }) {
   const [summary, setSummary] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const handleSummarize = async () => {
-    const result = await getSuggestions(text);
+    setLoading(true);
+    const result = await getSuggestions(title, author);
     setSummary(result);
+    setLoading(false);
   };
 
   return (
     <div className="p-4">
-      <textarea className="w-full border p-2" rows={6} value={text} onChange={(e) => setText(e.target.value)} />
-      <button onClick={handleSummarize} className="mt-2 bg-blue-500 text-white px-4 py-2">Summarize</button>
+        <h2> 🤖 AI Recommendation Component</h2>
+      <button
+        onClick={handleSummarize}
+        className="mt-2 bg-blue-500 text-white px-4 py-2"
+      >
+        {loading ? "Loading..." : "Suggest Similar Books"}
+      </button>
+
       <ul className="mt-4 list-disc ml-5">
-        {summary.map((point, i) => <li key={i}>{point}</li>)}
+        {summary.map((point, i) => (
+          <li key={i}>
+            <strong>Title:</strong> {point.title}, <strong>Author:</strong> {point.author}
+          </li>
+        ))}
       </ul>
     </div>
   );

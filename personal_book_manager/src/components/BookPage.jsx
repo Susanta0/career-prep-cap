@@ -3,18 +3,18 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useNavigate } from "react-router-dom";
 
 const BookPage = () => {
-  // Load books from localStorage on mount
+  
   const [books, setBooks] = useState(() => {
     const stored = localStorage.getItem("books");
     return stored ? JSON.parse(stored) : [];
   });
 
-    // Save books to localStorage whenever they change
+  
   useEffect(() => {
     localStorage.setItem("books", JSON.stringify(books));
   }, [books]);
 
-  const navigate=useNavigate()
+  const navigate = useNavigate();
 
   return (
     <div className="App font-sans bg-gray-100 min-h-screen">
@@ -28,9 +28,22 @@ const BookPage = () => {
             genre: "",
             price: "",
             category: "",
+            description: "",
+          }}
+          validate={(values) => {
+            const errors = {};
+            if (!values.title) errors.title = "Title is required";
+            if (!values.author) errors.author = "Author is required";
+            if (!values.genre) errors.genre = "Genre is required";
+            if (!values.price) {
+              errors.price = "Price is required";
+            } else if (isNaN(values.price) || Number(values.price) <= 0) {
+              errors.price = "Price must be a number greater than 0";
+            }
+            return errors;
           }}
           onSubmit={(values, { setSubmitting, resetForm }) => {
-            const newBook = { ...values, id: Date.now() }; // Add unique id
+            const newBook = { ...values, id: Date.now() };
             setBooks((prevBooks) => [...prevBooks, newBook]);
             setSubmitting(false);
             resetForm();
@@ -77,10 +90,12 @@ const BookPage = () => {
               />
 
               <Field
-                type="text"
+                type="number"
                 name="price"
                 placeholder="Enter book price"
                 className="block w-11/12 mx-auto my-2 p-2 rounded border border-gray-300"
+                min="1"
+                step="any"
               />
               <ErrorMessage
                 name="price"
@@ -98,6 +113,14 @@ const BookPage = () => {
                 name="category"
                 component="div"
                 className="text-red-500 text-xs"
+              />
+
+              <Field
+                as="textarea"
+                name="description"
+                placeholder="Enter book description (optional)"
+                className="block w-11/12 mx-auto my-2 p-2 rounded border border-gray-300"
+                rows={3}
               />
 
               <button
